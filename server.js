@@ -59,6 +59,24 @@ app.post('/orders', async (req, res) => {
   }
 });
 
+app.patch('/orders/:trackingNumber', async (req, res) => {
+    try {
+        const { trackingNumber } = req.params;
+        const updatedOrder = await Order.findOneAndUpdate(
+            { trackingNumber },
+            req.body,
+            { new: true } // Trả về bản ghi đã được cập nhật
+        );
+        if (!updatedOrder) {
+            return res.status(404).send('Order not found');
+        }
+        res.json(updatedOrder);
+    } catch (err) {
+        console.error('Error updating data:', err);
+        res.status(500).send('Error updating data');
+    }
+});
+
 // API để xóa đơn hàng
 app.delete('/orders/:trackingNumber', async (req, res) => {
   try {
