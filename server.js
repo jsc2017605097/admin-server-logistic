@@ -52,7 +52,8 @@ app.post('/orders', async (req, res) => {
     await writeJSONFile(data);
     res.status(201).json(newOrder);
   } catch (err) {
-    res.status(500).send('Error saving data');
+    console.log("loi roi ba con oi",err)
+    res.status(500).send(err.message);
   }
 });
 
