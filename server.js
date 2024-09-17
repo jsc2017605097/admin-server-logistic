@@ -65,6 +65,7 @@ app.delete('/orders/:trackingNumber', async (req, res) => {
     await writeJSONFile(updatedData);
     res.status(204).end();
   } catch (err) {
+    console.log(err)
     res.status(500).send('Error deleting data');
   }
 });
