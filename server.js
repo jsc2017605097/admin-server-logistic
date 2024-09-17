@@ -2,12 +2,14 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // Import cors
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'orders.json');
 
 // Middleware
+app.use(cors()); // Enable CORS
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
